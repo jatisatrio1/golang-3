@@ -1,6 +1,7 @@
 package main
 
 import (
+	"time"
 	"weather/controller"
 
 	"github.com/labstack/echo/v4"
@@ -8,6 +9,13 @@ import (
 
 func main() {
 	config.connect()
+
+	go func() {
+		for {
+			time.Sleep(15 * time.Second)
+			client.hitAPI()
+		}
+	}()
 
 	e := echo.New()
 
